@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			body {
+				background-color: #ffffff;
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script src="js/three.min.js"></script>
+		<script src="js/Detector.js"></script>
+		<script>
+	
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			
+			var camera, scene, renderer;
+			var geometry, material, mesh;
+
+			function setup() {
+
+				var W = window.innerWidth, H = window.innerHeight;
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize( W, H );
+				document.body.appendChild( renderer.domElement );
+
+				camera = new THREE.PerspectiveCamera( 50, W/H, 1, 10000 );
+				camera.position.z = 500;
+
+				scene = new THREE.Scene();
+				
+				for ( var i = 0; i < 50; i ++ ) {
+				geometry = new THREE.IcosahedronGeometry(169.23, 0);
+				material = new THREE.MeshBasicMaterial({shading: THREE.FlatShading, color: 0xff5cbc, wireframe: true, wireframeLinewidth: 8});
+				mesh = new THREE.Mesh(geometry, material);
+				mesh.position.x = Math.random() * 1000 - 500;
+					mesh.position.y = Math.random() * 1000 - 500;
+					mesh.position.z = Math.random() * 1000 - 500;
+					mesh.rotation.x = Math.random() * 2 * Math.PI;
+					mesh.rotation.y = Math.random() * 2 * Math.PI;
+					mesh.rotation.z = Math.random() * 2 * Math.PI;
+				scene.add(mesh);
+				}
+				
+				bg = document.body.style;
+				bg.background = '#cdebff';
+
+				geometry = new THREE.Geometry();
+				for ( i = 0; i < 5000; i ++ ) {
+					var vertex = new THREE.Vector3();
+					vertex.x = 1000 * Math.random() - 500;
+					vertex.y = 1000 * Math.random() - 500;
+					vertex.z = 1000 * Math.random() - 500;
+					geometry.vertices.push( vertex );
+				}
+				material = new THREE.ParticleBasicMaterial( { size: 5, sizeAttenuation: false, transparent: true } );
+				material.color.setHex( 0xff00ff );
+				particles = new THREE.ParticleSystem( geometry, material );
+				particles.sortParticles = true;
+				scene.add( particles );
+
+			}
+
+			function draw() {
+
+				requestAnimationFrame( draw );
+				
+				
+				var time = Date.now() * 0.0005;
+				h = ( 360 * ( 1.0 + time ) % 360 ) / 360;
+				material.color.setHSL( h, 0.5, 0.5 );
+				
+				particles.rotation.z = Date.now() * 0.0005;
+				
+				camera.lookAt(mesh.position);
+				camera.rotation.z = Math.sin( Date.now() * 0.0001 ) * 10;
+				camera.position.z = Math.sin( Date.now() * 0.001 ) * 500;
+
+				renderer.render( scene, camera );
+
+			}
+
+			setup();
+			draw();
+
+		</script>
+		
+	</body>
+</html>
