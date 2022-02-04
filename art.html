@@ -3,12 +3,33 @@
 <title>Art - Durbie</title>
 	<link rel="stylesheet" href="style.css">
   <style>
-    img{
-  width:250px;
-    border: 10px solid black;
-    border-radius: 12px;
-    max-width: 340px;
-    max-height:auto;
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap');
+:root{
+  font-size: 16pt;
+  font-family: 'Oswald', sans-serif;
+}
+#table{
+  background-color: lightblue;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 1em;
+}
+.person{
+  background-color: lightpink;
+  padding: 1em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+img{
+  width: 100%;
+  border-radius: 10%;
+}
+@media screen and (min-width: 800px){
+  #table{
+    grid-template-columns: 2fr 2fr 2fr;
+  }
 }
 </style>
 </head>
@@ -18,4 +39,29 @@
   <h1><br><a href="/">Durbie</a> <br></h1>
 </header>
 <h1>This page is a work in progress -durbie</h1>
+	
+	
+	<section id="table">
+  <section class="person">
+    <h2>Name</h2>
+    <img src="https://durbie.ml/art.png">
+    <h3>epic edd</h3>
+  </section>
+  <section class="person">
+    <h2>Name</h2>
+    <img src="https://durbie.ml/art.png">
+    <h3>epic edd</h3>
+  </section>
+  <section class="person">
+    <h2>Name</h2>
+    <img src="https://durbie.ml/art.png">
+    <h3>epic edd</h3>
+  </section>
+  <section class="person">
+    <h2>Name</h2>
+    <img src="https://durbie.ml/art.png">
+    <h3>epic edd</h3>
+  </section>  
+</section>
+
 </body>
